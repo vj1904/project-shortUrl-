@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Page</title>
+    <style type="text/css" media="screen">
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        text-decoration-color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>ShortId Generator</h2>
+    <% if (locals.id) { %>
+    <p>URL Generated: http://localhost:3000/urls/<%= id %></p>
+    <% } %>
+    <div>
+      <form action="/url" method="post">
+        <label for="url">Enter Your Original URL</label>
+        <input type="text" name="url" placeholder="https://example.com" />
+        <button type="submit">Generate</button>
+      </form>
+    </div>
+    <div>
+      <% if (locals.urls) { %>
+      <table>
+        <thead>
+          <th>S.No</th>
+          <th>ShortId</th>
+          <th>Redirect</th>
+          <th>Clicks</th>
+        </thead>
+        <tbody>
+          <% urls.forEach((url, index) => { %>
+          <tr>
+            <td><%= index+1 %></td>
+            <td><%= url.shortId %></td>
+            <td><%= url.redirectURL %></td>
+            <td><%= url.visitHistory.length %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+    </div>
+  </body>
+</html>
